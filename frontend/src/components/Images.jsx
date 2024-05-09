@@ -3,11 +3,20 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import "./Images.css";
 
-//! Function to call the backend api
+//! Function to call the backend api (local)
+// const fetchImageAPI = async() => {
+//     const res = await axios.get('http://localhost:9000/images');
+//     return res.data;
+// }
+
+//! Function to call the backend api (deployed)
+const backendURL = 'https://image-generator-backend.netlify.app';
+
 const fetchImageAPI = async() => {
-    const res = await axios.get('http://localhost:9000/images');
+    const res = await axios.get(`${backendURL}/images`);
     return res.data;
 }
+
 export default function Gallery() {
   const { data } = useQuery({
     queryKey: ["images"],

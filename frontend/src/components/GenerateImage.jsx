@@ -4,10 +4,18 @@ import {useMutation} from '@tanstack/react-query';
 import "./GenerateImage.css";
 import Images from './Images';
 
-//! Function to call the backend api
+//! Function to call the backend api (local)
+// const GenerateImageAPI = async(prompt) => {
+//     const res = await axios.post('http://localhost:9000/generate-image',{prompt})
+//     return res.data
+// }
+
+//! Function to call the backend api (deployed)
+const backendURL = 'https://image-generator-backend.netlify.app';
+
 const GenerateImageAPI = async(prompt) => {
-    const res = await axios.post('http://localhost:9000/generate-image',{prompt})
-    return res.data
+    const res = await axios.post(`${backendURL}/generate-image`, { prompt });
+    return res.data;
 }
 
 const GenerateImage = () => {

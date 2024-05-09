@@ -39,10 +39,17 @@ config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
     secure: true,
 });
+
 //! Cors
+// const corsOptions = {
+//     origin:['http://localhost:5173']
+// }
+
+//! Cors for deployement
 const corsOptions = {
-    origin:['http://localhost:5173']
+    origin:['*']
 }
+
 //!Middlewares
 app.use(express.json());
 app.use(cors(corsOptions))
