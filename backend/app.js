@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import { config, uploader } from "cloudinary";
 import OpenAI from "openai";
 // mongodb+srv://mtmailmt:SzLqYiu02L1bihJA@ai-art-work.vnqcsdy.mongodb.net/?retryWrites=true&w=majority&appName=ai-art-work
@@ -38,8 +39,14 @@ config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
     secure: true,
 });
+//! Cors
+const corsOptions = {
+    origin:['http://localhost:5173']
+}
 //!Middlewares
-app.use(express.json())
+app.use(express.json());
+app.use(cors(corsOptions))
+
 //!Routes
 app.post('/generate-image', async(req, res) => {
     const {prompt} = req.body
@@ -71,7 +78,7 @@ try {
 //!List images route
 app.get('/images', async(req, res) => {
     try {
-        const images = await Gallery.findOneAndDelete();
+        const images = await Gallery.find();
         res.json(images);
     } catch (error) {
       res.json({ message: "Error fetching images" })  
