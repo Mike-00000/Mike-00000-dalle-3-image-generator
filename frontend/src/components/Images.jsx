@@ -10,6 +10,7 @@ import "./Images.css";
 // }
 
 //! Function to call the backend api (deployed)
+
 const backendURL = 'https://image-generator-backend.netlify.app';
 
 const fetchImageAPI = async() => {
