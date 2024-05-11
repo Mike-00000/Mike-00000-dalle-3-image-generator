@@ -55,7 +55,7 @@ app.use(express.json());
 // app.use(cors(corsOptions))
 // Configurer les en-têtes CORS
 app.use(cors({
-    origin: "https://my-ai-image-generator.netlify.app",
+    origin: "*",
     methods: "GET,POST",
     allowedHeaders: "Content-Type,Authorization",
   }));
