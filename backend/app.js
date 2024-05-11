@@ -46,13 +46,19 @@ config({
 // }
 
 //! Cors for deployement
-const corsOptions = {
-    origin:['*']
-}
+// const corsOptions = {
+//     origin:['*']
+// }
 
 //!Middlewares
 app.use(express.json());
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
+// Configurer les en-têtes CORS
+app.use(cors({
+    origin: "https://main--my-ai-image-generator.netlify.app",
+    methods: "GET,POST",
+    allowedHeaders: "Content-Type,Authorization",
+  }));
 
 //!Routes
 app.post('/generate-image', async(req, res) => {
