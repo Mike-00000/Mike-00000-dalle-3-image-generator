@@ -12,7 +12,9 @@ import Images from './Images';
 
 //! Function to call the backend api (deployed)
 
-const backendURL = 'https://image-generator-backend.netlify.app';
+// https://image-generator-backend.netlify.app
+
+const backendURL = 'https://mike-00000-dalle-3-image-generator.onrender.com';
 
 const GenerateImageAPI = async(prompt) => {
     const res = await axios.post(`${backendURL}/generate-image`, { prompt });
