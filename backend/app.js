@@ -7,6 +7,7 @@ import { config, uploader } from "cloudinary";
 import OpenAI from "openai";
 // mongodb+srv://mtmailmt:SzLqYiu02L1bihJA@ai-art-work.vnqcsdy.mongodb.net/?retryWrites=true&w=majority&appName=ai-art-work
 
+const cors = require('cors');
 const app = express();
 const PORT = 9000;
 
@@ -50,15 +51,25 @@ config({
 //     origin:['*']
 // }
 
+
+// Récupérer la variable d'environnement CORS_ORIGINS
+const allowedOrigins = process.env.CORS_ORIGINS || '*';
+
 //!Middlewares
-app.use(express.json());
-// app.use(cors(corsOptions))
-// Configurer les en-têtes CORS
-app.use(cors({
-    origin: "*",
-    methods: "GET,POST",
-    allowedHeaders: "Content-Type,Authorization",
-  }));
+// app.use(express.json());
+// app.use(cors({
+//     origin: "*",
+//     methods: "GET,POST",
+//     allowedHeaders: "Content-Type,Authorization",
+//   }));
+
+app.use(
+    cors({
+      origin: allowedOrigins.split(','), // Convertir en tableau si plusieurs origines séparées par des virgules
+      methods: 'GET,POST',
+      allowedHeaders: 'Content-Type,Authorization',
+    })
+  );
 
 //!Routes
 app.post('/generate-image', async(req, res) => {
